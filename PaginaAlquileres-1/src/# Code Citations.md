@@ -1,4 +1,4 @@
-# Code Citations
+Code Citations
 
 ## License: unknown
 https://github.com/freyhill/freyhill.github.io/tree/93ff85076768e97a60b21dd49bebd8a681a5a912/example/currying/index.html
