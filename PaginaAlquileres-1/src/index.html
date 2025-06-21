@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veronica Basso Estilista</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
+            margin: 0;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 32px 0 18px 0;
+            box-shadow: 0 4px 12px rgba(118,75,162,0.1);
+        }
+        .header-logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+        .header-logo-title img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(118,75,162,0.18);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #ffd166;
+        }
+        main {
+            width: 95%;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+        }
+        section {
+            margin-bottom: 50px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .filters {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .filters button {
+            background: #fff;
+            color: #764ba2;
+            border: 2px solid #764ba2;
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .filters button.active,
+        .filters button:hover {
+            background: #764ba2;
+            color: #fff;
+        }
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .listing {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(118,75,162,0.08);
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .listing[hidden] {
+            display: none !important;
+        }
+        .listing:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(118,75,162,0.16);
+        }
+        .listing img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            height: 180px;
+        }
+        .listing-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .listing-description {
+            color: #555;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .listing-button {
+            background: linear-gradient(90deg, #ffd166 0%, #fcb900 100%);
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .listing-button:hover {
+            background: linear-gradient(90deg, #fcb900 0%, #ffd166 100%);
+        }
+        .service-subtypes {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .service-subtypes.active {
+            display: flex;
+        }
+        .subtype-title {
+            font-weight: bold;
+            color: #764ba2;
+        }
+        /* Galería */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+            height: 180px;
+            box-shadow: 0 2px 8px rgba(118,75,162,0.08);
+        }
+        /* Testimonios */
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .testimonial {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(118,75,162,0.08);
+            padding: 18px 22px;
+            max-width: 340px;
+            min-width: 220px;
+            font-style: italic;
+            color: #555;
+            position: relative;
+        }
+        .testimonial::before {
+            content: "“";
+            font-size: 2.5rem;
+            color: #ffd166;
+            position: absolute;
+            left: 12px;
+            top: 0;
+        }
+        .testimonial .author {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #764ba2;
+            font-style: normal;
+        }
+        /* FAQ */
+        .faq {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(118,75,162,0.08);
+            margin-bottom: 12px;
+            padding: 16px 20px;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #764ba2;
+            cursor: pointer;
+        }
+        .faq-answer {
+            margin-top: 8px;
+            color: #555;
+            display: none;
+        }
+        .faq-answer.active {
+            display: block;
+        }
+        /* Contacto */
+        #contact {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(118,75,162,0.08);
+            padding: 30px 20px;
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+        }
+        #contact h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        #contact input, #contact textarea {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        #contact button {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 0;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #contact button:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+        }
+        .whatsapp-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, #25d366 0%, #128c7e 100%);
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.15rem;
+            border-radius: 8px;
+            padding: 14px 24px;
+            text-decoration: none;
+            margin: 30px auto 0 auto;
+            max-width: 320px;
+            box-shadow: 0 2px 8px rgba(18,140,126,0.12);
+            transition: background 0.2s;
+        }
+        .whatsapp-link:hover {
+            background: linear-gradient(90deg, #128c7e 0%, #25d366 100%);
+        }
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            font-size: 1rem;
+        }
+        @media (max-width: 600px) {
+            .listings-grid, .gallery-grid, .testimonials {
+                grid-template-columns: 1fr !important;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-logo-title">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT0iaAbz6GSv5cahwGFfX-LRVd_uoiBUUXTg&s" alt="Logo Veronica Basso Estilista">
+            <h1>Veronica Basso Estilista</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#gallery">Galería</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#faq">Preguntas</a></li>
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Filtros -->
+        <div class="filters">
+            <button class="filter-btn active" data-type="all">Todos</button>
+            <button class="filter-btn" data-type="corte">Corte</button>
+            <button class="filter-btn" data-type="coloracion">Coloración</button>
+            <button class="filter-btn" data-type="peinado">Peinado</button>
+        </div>
+        <!-- Sección de servicios -->
+        <section id="services">
+            <h2>Servicios</h2>
+            <div class="listings-grid" id="services-list">
+                <!-- Corte -->
+                <div class="listing" data-type="corte">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmE-vcyCUDqfQxAUVZSHbiL8P6-f5e_T-G6g&s" alt="Corte de cabello mujer">
+                    <div class="listing-title">Corte</div>
+                    <div class="listing-description">Cortes modernos y clásicos para damas, caballeros y niños.</div>
+                    <button class="listing-button show-subtypes">Ver opciones</button>
+                    <div class="service-subtypes">
+                        <div>
+                            <span class="subtype-title">Corte Dama</span> - $700
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20corte%20de%20dama" target="_blank">Reservar</a>
+                        </div>
+                        <div>
+                            <span class="subtype-title">Corte Caballero</span> - $600
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20corte%20de%20caballero" target="_blank">Reservar</a>
+                        </div>
+                        <div>
+                            <span class="subtype-title">Corte Niño</span> - $500
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20corte%20de%20ni%C3%B1o" target="_blank">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Coloración -->
+                <div class="listing" data-type="coloracion">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy1dLLIy-qlt1r54WdIqlidgG0TNLp0mhaBg&s" alt="Coloración de cabello">
+                    <div class="listing-title">Coloración</div>
+                    <div class="listing-description">Tintes, balayage, mechas y más. Asesoría personalizada.</div>
+                    <button class="listing-button show-subtypes">Ver opciones</button>
+                    <div class="service-subtypes">
+                        <div>
+                            <span class="subtype-title">Tinte Completo</span> - $1200
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20tinte%20completo" target="_blank">Reservar</a>
+                        </div>
+                        <div>
+                            <span class="subtype-title">Balayage</span> - $1800
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20balayage" target="_blank">Reservar</a>
+                        </div>
+                        <div>
+                            <span class="subtype-title">Mechas</span> - $1500
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20mechas" target="_blank">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Peinado -->
+                <div class="listing" data-type="peinado">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBnNljpmSxr2F7PkKK-vrkgT2s4OTkCw2IXQ&s" alt="Peinado profesional">
+                    <div class="listing-title">Peinado</div>
+                    <div class="listing-description">Peinados para eventos, fiestas y ocasiones especiales.</div>
+                    <button class="listing-button show-subtypes">Ver opciones</button>
+                    <div class="service-subtypes">
+                        <div>
+                            <span class="subtype-title">Peinado Fiesta</span> - $900
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20peinado%20de%20fiesta" target="_blank">Reservar</a>
+                        </div>
+                        <div>
+                            <span class="subtype-title">Peinado Novia</span> - $1500
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20peinado%20de%20novia" target="_blank">Reservar</a>
+                        </div>
+                        <div>
+                            <span class="subtype-title">Peinado Infantil</span> - $700
+                            <a class="listing-button" href="https://wa.me/59899804602?text=Quiero%20reservar%20un%20peinado%20infantil" target="_blank">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Galería de trabajos -->
+      
+        <!-- Testimonios -->
+        <section id="testimonials">
+            <h2>Testimonios</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    ¡Excelente atención y profesionalismo! Me encantó mi nuevo look.
+                    <span class="author">- Mariana G.</span>
+                </div>
+                <div class="testimonial">
+                    Veronica es una genia, siempre salgo feliz con mi color y corte.
+                    <span class="author">- Laura P.</span>
+                </div>
+                <div class="testimonial">
+                    Muy recomendable, el peinado de mi boda quedó hermoso.
+                    <span class="author">- Sofía R.</span>
+                </div>
+            </div>
+        </section>
+        <!-- Preguntas frecuentes -->
+        <section id="faq">
+            <h2>Preguntas frecuentes</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">¿Trabajas con productos veganos?</div>
+                    <div class="faq-answer">Sí, utilizo productos veganos y cruelty free para coloración y tratamientos.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Cómo reservo un turno?</div>
+                    <div class="faq-answer">Podés reservar tu turno fácilmente por WhatsApp o completando el formulario de contacto.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Dónde está ubicada la peluquería?</div>
+                    <div class="faq-answer">La peluquería está en Montevideo, zona Pocitos. Consultá la dirección exacta por WhatsApp.</div>
+                </div>
+            </div>
+        </section>
+        <!-- Sección sobre mí -->
+        <section id="about">
+            <h2>Sobre mí</h2>
+            <div style="background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(118,75,162,0.08); padding: 30px 20px; max-width: 700px; margin: 0 auto 40px auto;">
+                <p>
+                    ¡Hola! Soy Veronica Basso, estilista profesional con más de 10 años de experiencia en el rubro de la belleza. Mi pasión es ayudarte a encontrar tu mejor versión, brindando un servicio personalizado y de calidad en cada visita. Me especializo en cortes, coloración y peinados para todo tipo de eventos.
+                </p>
+            </div>
+        </section>
+        <!-- Sección de contacto -->
+        <section id="contact">
+            <h2>Contacto</h2>
+            <form>
+                <input type="text" placeholder="Tu nombre" required>
+                <input type="email" placeholder="Tu email" required>
+                <textarea rows="4" placeholder="¿En qué puedo ayudarte?" required></textarea>
+                <button type="submit">Enviar mensaje</button>
+            </form>
+            <a href="https://wa.me/59899804602" target="_blank" class="whatsapp-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:28px;height:28px;">
+                Reservá tu turno por WhatsApp
+            </a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Veronica Basso Estilista. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        // Filtro de servicios
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const type = this.getAttribute('data-type');
+                document.querySelectorAll('.listing').forEach(listing => {
+                    if (type === 'all' || listing.getAttribute('data-type') === type) {
+                        listing.style.display = '';
+                    } else {
+                        listing.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Mostrar subtipos
+        document.querySelectorAll('.show-subtypes').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const subtypes = this.nextElementSibling;
+                document.querySelectorAll('.service-subtypes').forEach(st => {
+                    if (st !== subtypes) st.classList.remove('active');
+                });
+                subtypes.classList.toggle('active');
+            });
+        });
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
