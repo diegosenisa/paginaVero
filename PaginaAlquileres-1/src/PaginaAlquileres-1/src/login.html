@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Veronica Basso Estilista</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="hair">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="scissors-icon">
+            <!-- SVG de tijera -->
+            <svg viewBox="0 0 64 64" width="70" height="70">
+                <g>
+                    <ellipse cx="18" cy="46" rx="10" ry="10" fill="#ffd166" stroke="#764ba2" stroke-width="2"/>
+                    <ellipse cx="46" cy="46" rx="10" ry="10" fill="#ffd166" stroke="#764ba2" stroke-width="2"/>
+                    <rect x="28" y="10" width="8" height="32" rx="4" fill="#764ba2" transform="rotate(-20 32 26)"/>
+                    <rect x="28" y="10" width="8" height="32" rx="4" fill="#764ba2" transform="rotate(20 32 26)"/>
+                    <circle cx="32" cy="26" r="5" fill="#fff" stroke="#764ba2" stroke-width="2"/>
+                </g>
+            </svg>
+        </div>
+        <div class="login-title">Acceso estilista</div>
+        <div class="login-desc">Ingresá para administrar tu peluquería <br><span style="font-size:1.2em;">✂️</span></div>
+        <form class="login-form" id="loginForm" autocomplete="off">
+            <input type="text" id="usuario" placeholder="Usuario" value="diego" required>
+            <input type="password" id="clave" placeholder="Contraseña" value="123" required>
+            <button type="submit">Ingresar</button>
+        </form>
+        <div class="login-error" id="loginError"></div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const usuario = document.getElementById('usuario').value.trim();
+            const clave = document.getElementById('clave').value.trim();
+            const errorDiv = document.getElementById('loginError');
+            if(usuario === 'diego' && clave === '123') {
+                errorDiv.style.color = "#27ae60";
+                errorDiv.textContent = "¡Bienvenido Diego!";
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1200);
+            } else {
+                errorDiv.style.color = "#e74c3c";
+                errorDiv.textContent = "Usuario o contraseña incorrectos";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Listing</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+      :host {
+        display: block;
+        background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
+        min-height: 100vh;
+        font-family: 'Montserrat', Arial, sans-serif;
+      }
+      .login-container {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 6px 32px rgba(118,75,162,0.13);
+        padding: 38px 32px 32px 32px;
+        max-width: 350px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        margin: 60px auto;
+      }
+      .scissors-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 18px;
+        display: inline-block;
+      }
+      .login-title {
+        font-size: 1.7rem;
+        color: #764ba2;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .login-desc {
+        color: #555;
+        margin-bottom: 22px;
+        font-size: 1.05rem;
+      }
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .login-form input {
+        padding: 10px;
+        border-radius: 7px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        outline: none;
+        transition: border 0.2s;
+      }
+      .login-form input:focus {
+        border: 1.5px solid #764ba2;
+      }
+      .login-form button {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .login-form button:hover {
+        background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+      }
+      .login-error {
+        margin-top: 10px;
+        font-size: 0.98rem;
+        min-height: 22px;
+      }
+      .hair {
+        position: absolute;
+        top: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90px;
+        height: 20px;
+        z-index: 0;
+      }
+      .hair span {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ffd166 60%, #fcb900 100%);
+        margin: 0 2px;
+        opacity: 0.7;
+      }
+    </style>
+</head>
+<body>
+    <div class="listing">
+        <h2 class="listing-title">Apartment in Downtown</h2>
+        <img src="path/to/image.jpg" alt="Apartment in Downtown" class="listing-image">
+        <p class="listing-description">This beautiful apartment is located in the heart of downtown, close to shops and restaurants.</p>
+        <p class="listing-price">$1,500/month</p>
+        <button class="listing-button">Contact Owner</button>
+    </div>
+
+    <div class="listing">
+        <h2 class="listing-title">Cozy House in Suburbs</h2>
+        <img src="path/to/image.jpg" alt="Cozy House in Suburbs" class="listing-image">
+        <p class="listing-description">A cozy house perfect for families, with a spacious backyard and nearby parks.</p>
+        <p class="listing-price">$2,000/month</p>
+        <button class="listing-button">Contact Owner</button>
+    </div>
+
+    <div class="login-container">
+      <div class="hair">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="scissors-icon">
+        <svg viewBox="0 0 64 64" width="70" height="70">
+          <g>
+            <ellipse cx="18" cy="46" rx="10" ry="10" fill="#ffd166" stroke="#764ba2" stroke-width="2"/>
+            <ellipse cx="46" cy="46" rx="10" ry="10" fill="#ffd166" stroke="#764ba2" stroke-width="2"/>
+            <rect x="28" y="10" width="8" height="32" rx="4" fill="#764ba2" transform="rotate(-20 32 26)"/>
+            <rect x="28" y="10" width="8" height="32" rx="4" fill="#764ba2" transform="rotate(20 32 26)"/>
+            <circle cx="32" cy="26" r="5" fill="#fff" stroke="#764ba2" stroke-width="2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="login-title">Acceso estilista</div>
+      <div class="login-desc">
+        Ingresá para administrar tu peluquería <br>
+        <span style="font-size:1.2em;">✂️</span>
+      </div>
+      <form class="login-form" (ngSubmit)="login()" autocomplete="off">
+        <input type="text" [(ngModel)]="usuario" name="usuario" placeholder="Usuario" required>
+        <input type="password" [(ngModel)]="clave" name="clave" placeholder="Contraseña" required>
+        <button type="submit">Ingresar</button>
+      </form>
+      <div class="login-error" [ngStyle]="{'color': loginOk ? '#27ae60' : '#e74c3c'}">{{loginMsg}}</div>
+    </div>
+</body>
+</html>
